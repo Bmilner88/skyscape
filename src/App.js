@@ -8,16 +8,18 @@ import "./App.css";
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
-  const [stateItems, setStateItems] = useState({ city: "", state: "" });
+  const [searchItems, setSearchItems] = useState({ city: "", state: "" });
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [week, setWeek] = useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setStateItems({
-      ...stateItems,
+    setSearchItems({
+      ...searchItems,
       [name]: value,
     });
   };
@@ -25,10 +27,11 @@ function App() {
   const handleSearch = async (event) => {
     event.preventDefault();
 
-    console.log(stateItems.city, stateItems.state);
+    console.log(searchItems.city, searchItems.state);
+    setHasSearched(true);
 
     await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${stateItems.city},${stateItems.state}&appid=${API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${searchItems.city},${searchItems.state}&appid=${API_KEY}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -47,6 +50,7 @@ function App() {
             }
           );
       });
+    setWeek(items.daily.splice(0, 7));
   };
 
   return (
@@ -58,7 +62,7 @@ function App() {
         name="city"
         type="city"
         id="city"
-        value={stateItems.email}
+        value={searchItems.email}
         onChange={handleChange}
       />
       <input
@@ -67,7 +71,7 @@ function App() {
         name="state"
         type="state"
         id="state"
-        value={stateItems.email}
+        value={searchItems.email}
         onChange={handleChange}
       />
       <button onClick={handleSearch}>Search</button>
@@ -85,12 +89,12 @@ function App() {
         </div>
       )}
 
-      {!isLoaded && <div>Loading...</div>}
+      {!isLoaded && hasSearched && <div>Loading...</div>}
 
       {isLoaded && (
         <div>
           <Current current={items.current} />
-          <Week week={items.daily} />
+          <Week week={week} />
         </div>
       )}
     </div>
