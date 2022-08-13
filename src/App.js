@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [current, setCurrent] = useState();
   const [week, setWeek] = useState();
 
   const handleChange = (event) => {
@@ -27,7 +27,6 @@ function App() {
   const handleSearch = async (event) => {
     event.preventDefault();
 
-    console.log(searchItems.city, searchItems.state);
     setHasSearched(true);
 
     await fetch(
@@ -42,7 +41,8 @@ function App() {
           .then(
             (result) => {
               setIsLoaded(true);
-              setItems(result);
+              setCurrent(result.current);
+              setWeek(result.daily.splice(0, 7));
             },
             (error) => {
               setIsLoaded(true);
@@ -50,50 +50,36 @@ function App() {
             }
           );
       });
-    setWeek(items.daily.splice(0, 7));
   };
 
   return (
     <div className="App">
       <Header className="App-header" />
-      <input
-        className="form-input"
-        placeholder="Your city"
-        name="city"
-        type="city"
-        id="city"
-        value={searchItems.email}
-        onChange={handleChange}
-      />
-      <input
-        className="form-input"
-        placeholder="Your state"
-        name="state"
-        type="state"
-        id="state"
-        value={searchItems.email}
-        onChange={handleChange}
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSearch}>
+        <input
+          className="form-input"
+          placeholder="Your city"
+          name="city"
+          value={searchItems.email}
+          onChange={handleChange}
+        />
+        <input
+          className="form-input"
+          placeholder="Your state"
+          name="state"
+          value={searchItems.email}
+          onChange={handleChange}
+        />
+        <button type="submit">Search</button>
+      </form>
 
-      {error && (
-        <div>
-          <div className="card" id="weatherCard">
-            <div className="card-body">
-              <div className="weatherTitle">Local Weather</div>
-              <div className="card-text">
-                <div>Error: {error.message}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {error && <div>Error: {error.message}</div>}
 
       {!isLoaded && hasSearched && <div>Loading...</div>}
 
       {isLoaded && (
         <div>
-          <Current current={items.current} />
+          <Current current={current} />
           <Week week={week} />
         </div>
       )}
