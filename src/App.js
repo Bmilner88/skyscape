@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 
 import Header from "./components/Header";
 import Current from "./components/Current";
@@ -29,6 +29,7 @@ function App() {
   const handleSearch = async (event) => {
     event.preventDefault();
 
+    setIsLoaded(false);
     setHasSearched(true);
 
     await fetch(
@@ -79,9 +80,9 @@ function App() {
       {error && <div>Error: {error.message}</div>}
 
       {!isLoaded && hasSearched && (
-        <div>
-          <Fade>Loading...</Fade>
-        </div>
+        <Fade>
+          <div>Loading...</div>
+        </Fade>
       )}
 
       {isLoaded && (
