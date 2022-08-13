@@ -29,7 +29,7 @@ function App() {
   const handleSearch = async (event) => {
     event.preventDefault();
 
-    //setIsLoaded(!isLoaded);
+    setIsLoaded(false);
     setHasSearched(true);
 
     await fetch(
@@ -87,8 +87,12 @@ function App() {
 
       {isLoaded && (
         <div>
-          <Current current={current} />
-          <Week week={week} />
+          <Fade>
+            <Current current={current} />
+          </Fade>
+          <Fade>
+            <Week week={week} />
+          </Fade>
         </div>
       )}
     </div>
