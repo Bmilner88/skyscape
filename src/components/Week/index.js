@@ -2,14 +2,20 @@ import React from "react";
 
 function Week({ week }) {
   return (
-    <div>
-      {week &&
-        week.map(day => (
-            <div>
-                <div>{new Date(day.dt * 1000).toLocaleDateString()}</div>
-                <div>{`Day Temp: ${day.temp.day}°`}</div>
+    <div className="container">
+      <div className="row">
+        {week &&
+          week.map((day) => (
+            <div className="card col-sm">
+              <div className="card-title">{new Date(day.dt * 1000).toLocaleDateString()}</div>
+              <div className="card-body">
+                <p>{`${day.weather[0].main}`}</p>
+                <p>{`Day ${day.temp.day}°`}</p>
+                <p>{`Night ${day.temp.night}°`}</p>
+              </div>
             </div>
-        ))}
+          ))}
+      </div>
     </div>
   );
 }
