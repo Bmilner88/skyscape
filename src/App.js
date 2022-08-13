@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
+
 import Header from "./components/Header";
 import Current from "./components/Current";
 import Week from "./components/Week";
@@ -42,7 +44,8 @@ function App() {
             (result) => {
               setIsLoaded(true);
               setCurrent(result.current);
-              setWeek(result.daily.splice(0, 7));
+              setWeek(result.daily.splice(1, 7));
+              setSearchItems({ city: "", state: "" });
             },
             (error) => {
               setIsLoaded(true);
@@ -60,14 +63,14 @@ function App() {
           className="form-input"
           placeholder="Your city"
           name="city"
-          value={searchItems.email}
+          value={searchItems.city}
           onChange={handleChange}
         />
         <input
           className="form-input"
           placeholder="Your state"
           name="state"
-          value={searchItems.email}
+          value={searchItems.state}
           onChange={handleChange}
         />
         <button type="submit">Search</button>
@@ -75,12 +78,20 @@ function App() {
 
       {error && <div>Error: {error.message}</div>}
 
-      {!isLoaded && hasSearched && <div>Loading...</div>}
+      {!isLoaded && hasSearched && (
+        <div>
+          <Fade>Loading...</Fade>
+        </div>
+      )}
 
       {isLoaded && (
         <div>
-          <Current current={current} />
-          <Week week={week} />
+          <Fade>
+            <Current current={current} />
+          </Fade>
+          <Fade>
+            <Week week={week} />
+          </Fade>
         </div>
       )}
     </div>

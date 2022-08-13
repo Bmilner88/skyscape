@@ -5,9 +5,10 @@ function Week({ week }) {
     <div>
       {week &&
         week.map(day => (
-          <div>
-            <div>{`Day Temp: ${day.temp.day}°`}</div>
-          </div>
+            <div>
+                <div>{new Date(day.dt * 1000).toLocaleDateString()}</div>
+                <div>{`Day Temp: ${day.temp.day}°`}</div>
+            </div>
         ))}
     </div>
   );

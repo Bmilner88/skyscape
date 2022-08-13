@@ -3,7 +3,7 @@ import React from "react";
 function Current({ current }) {
   return (
     <div>
-      Local Weather
+      {`Date: ${new Date(current.dt * 1000).toLocaleDateString()}`}
       <div>{`Current Temp: ${current.temp}°`}</div>
       <div>
         {`Weather today:  ${current.weather[0].main}`}
