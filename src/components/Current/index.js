@@ -7,7 +7,7 @@ function Current({ current }) {
       <div>
         {`Weather today:  ${current.weather[0].main}`}
         <img
-          src={`https://openweathermap.org/img/w/${current.weather[0].icon}.png`}
+          src={`http://openweathermap.org/img/wn/${current.weather[0].icon}.png`}
           alt="weather icon"
         />
       </div>
