@@ -18,8 +18,8 @@ function Week({ week }) {
                     alt="weather icon"
                   />
                 </p>
-                <p>{`Day ${day.temp.day}°`}</p>
-                <p>{`Night ${day.temp.night}°`}</p>
+                <p>{`Day ${day.temp.day.toFixed()}°`}</p>
+                <p>{`Night ${day.temp.night.toFixed()}°`}</p>
               </div>
             </div>
           ))}

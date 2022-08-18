@@ -3,7 +3,7 @@ import React from "react";
 function Current({ current }) {
   return (
     <div>
-      <div>{`Current Temp: ${current.temp}°`}</div>
+      <div>{`Current Temp: ${current.temp.toFixed()}°`}</div>
       <div>
         {`Weather today:  ${current.weather[0].main}`}
         <img

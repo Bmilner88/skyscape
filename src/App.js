@@ -7,7 +7,7 @@ import Week from "./components/Week";
 
 import "./App.css";
 
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const W_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
   const [searchItems, setSearchItems] = useState({ city: "", state: "" });
@@ -33,12 +33,12 @@ function App() {
     setHasSearched(true);
 
     await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${searchItems.city},${searchItems.state}&appid=${API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${searchItems.city},${searchItems.state}&appid=${W_API_KEY}`
     )
       .then((res) => res.json())
       .then((json) => {
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&units=imperial&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
         )
           .then((res) => res.json())
           .then(
