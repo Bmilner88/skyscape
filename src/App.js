@@ -33,7 +33,7 @@ function App() {
     setHasSearched(true);
 
     await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${searchItems.city},${searchItems.state}&appid=${W_API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${searchItems.city.toLowerCase()},${searchItems.state.toLowerCase()}&appid=${W_API_KEY}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -58,40 +58,51 @@ function App() {
 
   return (
     <div className="App">
-      <Header className="App-header" />
-      <form onSubmit={handleSearch}>
-        <input
-          className="form-input"
-          placeholder="Your city"
-          name="city"
-          value={searchItems.city}
-          onChange={handleChange}
-        />
-        <input
-          className="form-input"
-          placeholder="Your state"
-          name="state"
-          value={searchItems.state}
-          onChange={handleChange}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <Header />
+      <nav className="app-header">
+        <form className="p-2" onSubmit={handleSearch}>
+          <input
+            className="m-2 search-input"
+            type="text"
+            name="city"
+            placeholder="City"
+            value={searchItems.city}
+            onChange={handleChange}
+          />
+          <input
+            className="m-2 search-input"
+            type="text"
+            name="state"
+            placeholder="State"
+            value={searchItems.state}
+            onChange={handleChange}
+          />
+
+          <button className="m-2 btn btn-dark" type="submit">
+            Search
+          </button>
+        </form>
+      </nav>
 
       {error && <div>Error: {error.message}</div>}
 
       {!isLoaded && hasSearched && (
         <Fade>
-          <div>Loading...</div>
+          <div className="m-5">Loading...</div>
         </Fade>
       )}
 
       {isLoaded && (
         <div>
           <Fade>
-            <Current current={current} />
+            <div className="m-5">
+              <Current current={current} />
+            </div>
           </Fade>
           <Fade>
-            <Week week={week} />
+            <div className="mt-5">
+              <Week week={week} />
+            </div>
           </Fade>
         </div>
       )}

@@ -6,7 +6,7 @@ function Week({ week }) {
       <div className="row">
         {week &&
           week.map((day) => (
-            <div className="card col-sm">
+            <div className="card col-sm m-2">
               <div className="card-title">
                 {new Date(day.dt * 1000).toLocaleDateString()}
               </div>

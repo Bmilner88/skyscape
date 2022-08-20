@@ -1,3 +1,18 @@
 .App {
   text-align: center;
 }
+
+.app-header {
+  background-color: gray;
+}
+
+.search-input {
+  width: 250px;
+  padding: 6px 12px 6px 12px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.search-input :focus {
+  border: none;
+}
