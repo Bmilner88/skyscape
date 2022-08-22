@@ -16,6 +16,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [current, setCurrent] = useState();
   const [week, setWeek] = useState();
+  const [hourly, setHourly] = useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -46,6 +47,7 @@ function App() {
               setIsLoaded(true);
               setCurrent(result.current);
               setWeek(result.daily.splice(1, 7));
+              setHourly(result.hourly.splice(0, 10));
               setSearchItems({ city: "", state: "" });
             },
             (error) => {
@@ -88,7 +90,7 @@ function App() {
 
       {!isLoaded && hasSearched && (
         <Fade>
-          <div className="m-5">Loading...</div>
+          <h2 className="m-5">Loading...</h2>
         </Fade>
       )}
 
@@ -96,7 +98,7 @@ function App() {
         <div>
           <Fade>
             <div className="m-5">
-              <Current current={current} />
+              <Current current={current} hourly={hourly} />
             </div>
           </Fade>
           <Fade>
