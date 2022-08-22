@@ -47,7 +47,7 @@ function App() {
               setIsLoaded(true);
               setCurrent(result.current);
               setWeek(result.daily.splice(1, 7));
-              setHourly(result.hourly.splice(0, 10));
+              setHourly(result.hourly.splice(1, 11));
               setSearchItems({ city: "", state: "" });
             },
             (error) => {
