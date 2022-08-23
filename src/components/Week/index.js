@@ -2,7 +2,7 @@ import React from "react";
 
 function Week({ week }) {
   return (
-    <div className="container pt-5">
+    <div className="container p-5">
       <div className="row">
         <h3>7-day Forecast</h3>
         {week &&
