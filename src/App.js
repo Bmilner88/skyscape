@@ -86,6 +86,17 @@ function App() {
         </form>
       </nav>
 
+      {!isLoaded && !hasSearched && (
+        <Fade>
+          <h5 className="m-5">
+            Skyscape is a basic weather app built with React and OpenWeatherAPI.
+            <br></br>
+            <br></br>
+            Use the search inputs above to see the current and upcoming weather.
+          </h5>
+        </Fade>
+      )}
+
       {error && <div>Error: {error.message}</div>}
 
       {!isLoaded && hasSearched && (
