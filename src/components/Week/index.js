@@ -29,14 +29,13 @@ function Week({ week }) {
         {week &&
           week.map((day) => (
             <div className="m-2 col-sm">
-              <h5 className="">
+              <h5>
                 {dayOfWeek(new Date(day.dt * 1000).getDay())}
                 <br></br>
                 {new Date(day.dt * 1000).toLocaleDateString().slice(0, 4)}
               </h5>
-              <h6 className="">{`${day.weather[0].main}`}</h6>
+              <h6>{`${day.weather[0].main}`}</h6>
               <img
-                className=""
                 src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
                 alt="weather icon"
               />

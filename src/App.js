@@ -36,7 +36,7 @@ function App() {
     event.preventDefault();
 
     if (!searchItems.city && !searchItems.state) {
-      return
+      return;
     };
 
     setIsLoaded(false);
@@ -60,7 +60,6 @@ function App() {
               setCurrent(result.current);
               setWeek(result.daily.splice(1, 7));
               setHourly(result.hourly.splice(1, 11));
-              setSearchItems({ city: "", state: "" });
             },
             (error) => {
               setIsLoaded(true);
@@ -93,6 +92,7 @@ function App() {
                 name="state"
                 type="state"
                 id="state"
+                value={searchItems.state}
                 onChange={handleChange}
               >
                 <option style={{ color: "gray" }} value="">
