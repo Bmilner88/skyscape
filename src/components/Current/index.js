@@ -4,7 +4,7 @@ function Current({ current, hourly }) {
   function hours(hour) {
     const suffix = hour >= 12 ? " PM" : " AM";
     return ((hour + 11) % 12) + 1 + suffix;
-  }
+  };
 
   function uviColor(uvi) {
     if (uvi <= 3) {
@@ -13,8 +13,8 @@ function Current({ current, hourly }) {
       return "warning";
     } else {
       return "danger";
-    }
-  }
+    };
+  };
 
   return (
     <div>
