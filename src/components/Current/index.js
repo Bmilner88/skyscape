@@ -18,9 +18,9 @@ function Current({ current, hourly }) {
 
   return (
     <div>
-      <h1>{`Current Temp: ${current.temp.toFixed()}°`}</h1>
+      <h2>{`Current Temp: ${current.temp.toFixed()}°`}</h2>
       <div>
-        <h1>
+        <h2>
           {current.weather[0].main}
           <span>
             <img
@@ -28,7 +28,7 @@ function Current({ current, hourly }) {
               alt="weather icon"
             />
           </span>
-        </h1>
+        </h2>
 
         <h6 className="m-4">
           Wind Speed: {current.wind_speed}mph

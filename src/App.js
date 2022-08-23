@@ -14,6 +14,8 @@ function App() {
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [cityState, setCityState] = useState({ city: "", state: "" });
   const [current, setCurrent] = useState();
   const [week, setWeek] = useState();
   const [hourly, setHourly] = useState();
@@ -38,6 +40,7 @@ function App() {
     )
       .then((res) => res.json())
       .then((json) => {
+        setCityState({ city: `${json[0].name}`, state: `${json[0].state}`});
         fetch(
           `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
         )
@@ -107,6 +110,7 @@ function App() {
 
       {isLoaded && (
         <div>
+          <h1 className="m-5">{`${cityState.city}, ${cityState.state}`}</h1>
           <Fade>
             <div className="m-5">
               <Current current={current} hourly={hourly} />
