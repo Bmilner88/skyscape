@@ -51,7 +51,7 @@ function App() {
       .then((json) => {
         setCityState({ city: `${json[0].name}`, state: `${json[0].state}` });
         fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely,hourly&units=imperial&appid=${W_API_KEY}`
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
         )
           .then((res) => res.json())
           .then(
