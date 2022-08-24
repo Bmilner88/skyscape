@@ -39,13 +39,9 @@ function Week({ week }) {
                 src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
                 alt="weather icon"
               />
-              <h6>
-                {`High: ${day.temp.day.toFixed()}°F`}
-                <br></br>
-                {`Low: ${day.temp.night.toFixed()}°F`}
-                <br></br>
-                {day.weather[0].main === "Rain" && `${day.pop * 100}%`}
-              </h6>
+              <h6>{`High: ${day.temp.day.toFixed()}°F`}</h6>
+              <h6>{`Low: ${day.temp.night.toFixed()}°F`}</h6>
+              <h6>{day.weather[0].main === "Rain" && `${day.pop * 100}%`}</h6>
             </div>
           ))}
       </div>
