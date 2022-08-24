@@ -67,7 +67,8 @@ function Current({ current, hourly }) {
                     </span>
                   </h6>
                   <h6>{hour.weather[0].main}</h6>
-                  <h6>{`${hour.temp.toFixed()}°`}</h6>
+                  <h6>{`${hour.temp.toFixed()}°F`}</h6>
+                  <h6>{hour.weather[0].main === "Rain" && `${hour.pop * 100}%`}</h6>
                 </div>
               ))}
           </div>
