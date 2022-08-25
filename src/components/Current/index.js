@@ -1,6 +1,7 @@
 import React from "react";
+import ReactECharts from "echarts-for-react";
 
-function Current({ current, hourly }) {
+function Current({ current, hourly, alerts }) {
   function hours(hour) {
     const suffix = hour >= 12 ? " PM" : " AM";
     return ((hour + 11) % 12) + 1 + suffix;
@@ -50,30 +51,68 @@ function Current({ current, hourly }) {
         </div>
       </div>
 
-      <div>
+      {alerts && (
+        <div className="container pt-5">
+          <div className="row">
+            {alerts.map((alert) => (
+              <div className="col">
+                <h4>{alert.event}</h4>
+                <p>{`${alert.description}`}</p>
+                <h6>Start: {hours(new Date(alert.start * 1000).getHours())}</h6>
+                <h6>End: {hours(new Date(alert.end * 1000).getHours())}</h6>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {hourly && (
         <div className="container pt-5">
           <div className="row">
             <h4 className="mb-4">10 Hour Forecast</h4>
-            {hourly &&
-              hourly.map((hour) => (
-                <div className="col-sm">
-                  <h6>
-                    {hours(new Date(hour.dt * 1000).getHours())}
-                    <span>
-                      <img
-                        src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
-                        alt="weather icon"
-                      />
-                    </span>
-                  </h6>
-                  <h6>{hour.weather[0].main}</h6>
-                  <h6>{`${hour.temp.toFixed()}°F`}</h6>
-                  <h6>{hour.weather[0].main === "Rain" && `${hour.pop * 100}%`}</h6>
-                </div>
-              ))}
+            <ReactECharts
+                option={{
+                  title: {
+                    text: "Temperature",
+                  },
+                  tooltip: {},
+                  xAxis: {
+                    data: hourly.map((hour) =>
+                      hours(new Date(hour.dt * 1000).getHours())
+                    ),
+                  },
+                  yAxis: {},
+                  series: [
+                    {
+                      name: "Temp",
+                      type: "line",
+                      data: hourly.map((hour) => 
+                      hour.temp.toFixed()),
+                    },
+                  ],
+                }}
+              />
+            {hourly.map((hour) => (
+              <div className="col-sm">
+                <h6>
+                  {hours(new Date(hour.dt * 1000).getHours())}
+                  <span>
+                    <img
+                      src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
+                      alt="weather icon"
+                    />
+                  </span>
+                </h6>
+                <h6>{hour.weather[0].main}</h6>
+                <h6>{`${hour.temp.toFixed()}°F`}</h6>
+                <h6>
+                  {hour.weather[0].main === "Rain" && `${hour.pop * 100}%`}
+                </h6>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
