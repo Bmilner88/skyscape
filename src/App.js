@@ -22,6 +22,7 @@ function App() {
   const [current, setCurrent] = useState();
   const [week, setWeek] = useState();
   const [hourly, setHourly] = useState();
+  const [alerts, setAlerts] = useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,6 +61,7 @@ function App() {
               setCurrent(result.current);
               setWeek(result.daily.splice(1, 7));
               setHourly(result.hourly.splice(1, 11));
+              setAlerts(result.alerts);
             },
             (error) => {
               setIsLoaded(true);
@@ -185,7 +187,7 @@ function App() {
           <h1 className="m-5">{`${cityState.city}, ${cityState.state}`}</h1>
           <Fade>
             <div className="m-5">
-              <Current current={current} hourly={hourly} />
+              <Current current={current} hourly={hourly} alerts={alerts}/>
             </div>
           </Fade>
           <Fade>
