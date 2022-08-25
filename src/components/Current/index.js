@@ -1,5 +1,5 @@
 import React from "react";
-import ReactECharts from "echarts-for-react";
+//import ReactECharts from "echarts-for-react";
 
 function Current({ current, hourly, alerts }) {
   function hours(hour) {
@@ -70,7 +70,7 @@ function Current({ current, hourly, alerts }) {
         <div className="container pt-5">
           <div className="row">
             <h4 className="mb-4">10 Hour Forecast</h4>
-            <ReactECharts
+            {/* <ReactECharts
                 option={{
                   title: {
                     text: "Temperature",
@@ -91,7 +91,7 @@ function Current({ current, hourly, alerts }) {
                     },
                   ],
                 }}
-              />
+              /> */}
             {hourly.map((hour) => (
               <div className="col-sm">
                 <h6>
