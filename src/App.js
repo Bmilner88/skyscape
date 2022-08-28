@@ -77,7 +77,7 @@ function App() {
       <nav className="app-header">
         <form className="p-2 form-row" onSubmit={handleSearch}>
           <div className="row justify-content-center">
-            <div className="col-2">
+            <div className="col-sm-4">
               <input
                 className="m-2 form-control"
                 type="text"
@@ -88,7 +88,7 @@ function App() {
               />
             </div>
 
-            <div className="col-2">
+            <div className="col-sm-4">
               <select
                 className="m-2 form-control"
                 name="state"
