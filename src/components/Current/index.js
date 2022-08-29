@@ -1,21 +1,7 @@
 import React from "react";
+import { hours, uviColor, precipitation, capitalizeFirstLetter } from "../../utils/helpers";
 
 function Current({ current, hourly, alerts }) {
-  function hours(hour) {
-    const suffix = hour >= 12 ? " PM" : " AM";
-    return ((hour + 11) % 12) + 1 + suffix;
-  }
-
-  function uviColor(uvi) {
-    if (uvi <= 3) {
-      return "success";
-    } else if (uvi >= 3 && uvi <= 5) {
-      return "warning";
-    } else {
-      return "danger";
-    }
-  }
-
   return (
     <div>
       <div className="container">
@@ -35,7 +21,10 @@ function Current({ current, hourly, alerts }) {
                 />
               </span>
             </h2>
-            <h6 className="mt-3">
+            <h6>
+              {capitalizeFirstLetter(current.weather[0].description)}
+            </h6>
+            <h6 className="mt-4">
               <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
                 UV Index: {current.uvi}
               </span>
@@ -83,7 +72,8 @@ function Current({ current, hourly, alerts }) {
                 <h6>{hour.weather[0].main}</h6>
                 <h6>{`${hour.temp.toFixed()}°F`}</h6>
                 <h6>
-                  {hour.weather[0].main === "Rain" && `${hour.pop * 100}%`}
+                  {precipitation(hour.weather[0].main) &&
+                    `${(hour.pop * 100).toFixed()}%`}
                 </h6>
               </div>
             ))}

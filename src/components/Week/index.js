@@ -1,27 +1,7 @@
 import React from "react";
+import { dayOfWeek } from "../../utils/helpers";
 
 function Week({ week }) {
-  function dayOfWeek(num) {
-    switch (num) {
-      case 0:
-        return "Sun";
-      case 1:
-        return "Mon";
-      case 2:
-        return "Tue";
-      case 3:
-        return "Wed";
-      case 4:
-        return "Thu";
-      case 5:
-        return "Fri";
-      case 6:
-        return "Sat";
-      default:
-        return;
-    }
-  }
-
   return (
     <div className="container p-5">
       <div className="row">
@@ -41,7 +21,11 @@ function Week({ week }) {
               />
               <h6>{`High: ${day.temp.day.toFixed()}°F`}</h6>
               <h6>{`Low: ${day.temp.night.toFixed()}°F`}</h6>
-              <h6>{day.weather[0].main === "Rain" && `${day.pop * 100}%`}</h6>
+              <h6>
+                {(day.weather[0].main === "Rain" ||
+                  day.weather[0].main === "Snow") &&
+                  `${(day.pop * 100).toFixed()}%`}
+              </h6>
             </div>
           ))}
       </div>
