@@ -90,7 +90,7 @@ function App() {
 
             <div className="col-sm-4">
               <select
-                className="m-2 form-control"
+                className="m-2 form-select"
                 name="state"
                 type="state"
                 id="state"
