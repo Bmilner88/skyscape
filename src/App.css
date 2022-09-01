@@ -9,4 +9,5 @@
 
 .app-header {
   background-image: linear-gradient(to right, var(--B), var(--A));
+  padding: 1%;
 }
