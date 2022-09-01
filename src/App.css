@@ -8,7 +8,5 @@
 }
 
 .app-header {
-  text-align: center;
-  padding: 1%;
   background-image: linear-gradient(to right, var(--B), var(--A));
 }
