@@ -118,7 +118,7 @@ function Current({ current, hourly, alerts }) {
                 </Card.Title>
               </Card.Header>
               <Card.Body className="py-5">
-                <div className="container-fluid py-2">
+                <div className={`container-fluid ${alerts ? " py-5" : ""}`}>
                   <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between">
                     {hourly.map((hour) => (
                       <div className="m-4">
