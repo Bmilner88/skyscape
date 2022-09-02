@@ -55,9 +55,9 @@ function Current({ current, hourly, alerts }) {
 
   return (
     <div className="container">
-      <div className="row align-items-center justify-content-center">
-        <div className="col-sm-auto col-lg-6 mb-3">
-          <Card>
+      <div className="row">
+        <div className="col-sm col-lg-6">
+          <Card className="mb-5">
             <Card.Header>
               <Card.Title>Current Weather</Card.Title>
             </Card.Header>
@@ -108,16 +108,16 @@ function Current({ current, hourly, alerts }) {
         </div>
 
         {hourly && (
-          <div className="col-lg-6 col-sm-auto mb-3">
+          <div className="col-lg-6 col-sm-auto d-flex mb-5 justify-content-center">
             <Card>
               <Card.Header>
                 <Card.Title>
                   <h4>12 Hour Forecast</h4>
                 </Card.Title>
               </Card.Header>
-              <Card.Body>
+              <Card.Body className="py-5">
                 <div className="container-fluid py-2">
-                  <div className="d-flex flex-row flex-nowrap overflow-auto">
+                  <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between">
                     {hourly.map((hour) => (
                       <div className="m-4">
                         <h6>

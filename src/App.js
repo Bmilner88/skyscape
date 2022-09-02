@@ -185,12 +185,12 @@ function App() {
         <div>
           <h1 className="m-5">{`${cityState.city}, ${cityState.state}`}</h1>
           <Fade>
-            <div className="mt-5 mb-5">
+            <div>
               <Current current={current} hourly={hourly} alerts={alerts} />
             </div>
           </Fade>
           <Fade>
-            <div className="mt-5 mb-5">
+            <div className="mb-5">
               <Week week={week} />
             </div>
           </Fade>
