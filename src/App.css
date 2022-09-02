@@ -5,9 +5,15 @@
 
 .App {
   text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: larger;
 }
 
 .app-header {
   background-image: linear-gradient(to right, var(--B), var(--A));
   padding: 1%;
+}
+
+.alertPopover {
+  max-width: 44%;
 }

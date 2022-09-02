@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import { Fade } from "react-awesome-reveal";
 
 import Header from "./components/Header";
@@ -177,7 +178,12 @@ function App() {
 
       {!isLoaded && hasSearched && (
         <Fade>
-          <h2 className="m-5">Loading...</h2>
+          <h2 className="m-5 text-center">
+            Loading{" "}
+            <span>
+              <Spinner className="m-0" animation="border" as="h6" />
+            </span>
+          </h2>
         </Fade>
       )}
 
@@ -185,12 +191,12 @@ function App() {
         <div>
           <h1 className="m-5">{`${cityState.city}, ${cityState.state}`}</h1>
           <Fade>
-            <div className="m-5">
+            <div>
               <Current current={current} hourly={hourly} alerts={alerts} />
             </div>
           </Fade>
           <Fade>
-            <div className="mt-5">
+            <div className="mb-5">
               <Week week={week} />
             </div>
           </Fade>
