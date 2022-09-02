@@ -59,7 +59,9 @@ function Current({ current, hourly, alerts }) {
         <div className="col-sm col-lg-6">
           <Card className="mb-5">
             <Card.Header>
-              <Card.Title>Current Weather</Card.Title>
+              <Card.Title>
+                <h4>Current Weather</h4>
+              </Card.Title>
             </Card.Header>
             <h3 className="mt-4">
               Current Temp:{" "}
