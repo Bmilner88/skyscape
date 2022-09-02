@@ -1,33 +1,54 @@
 import React from "react";
-import { dayOfWeek } from "../../utils/helpers";
+import Card from "react-bootstrap/Card";
+import { dayOfWeek, precipitation } from "../../utils/helpers";
 
 function Week({ week }) {
   return (
-    <div className="container p-5">
-      <div className="row">
-        <h3 className="mb-4">7-day Forecast</h3>
-        {week &&
-          week.map((day) => (
-            <div className="m-2 col-sm">
-              <h5>
-                {dayOfWeek(new Date(day.dt * 1000).getDay())}
-                <br></br>
-                {new Date(day.dt * 1000).toLocaleDateString().slice(0, 4)}
-              </h5>
-              <h6>{`${day.weather[0].main}`} </h6>
-              <img
-                src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                alt="weather icon"
-              />
-              <h6>{`High: ${day.temp.day.toFixed()}°F`}</h6>
-              <h6>{`Low: ${day.temp.night.toFixed()}°F`}</h6>
-              <h6>
-                {(day.weather[0].main === "Rain" ||
-                  day.weather[0].main === "Snow") &&
-                  `${(day.pop * 100).toFixed()}%`}
-              </h6>
-            </div>
-          ))}
+    <div className="container">
+      <div className="row align-items-center justify-content-center">
+        {week && (
+          <div className="col-sm-auto col-lg-auto">
+            <Card>
+              <Card.Header>
+                <Card.Title>
+                  <h4>7 Day Forecast</h4>
+                </Card.Title>
+              </Card.Header>
+              <Card.Body>
+                <div className="container-fluid py-2">
+                  <div className="d-flex flex-row flex-nowrap overflow-auto">
+                    {week.map((day) => (
+                      <div className="m-4">
+                        <h6>
+                          {dayOfWeek(new Date(day.dt * 1000).getDay())}{" "}
+                          {new Date(day.dt * 1000)
+                            .toLocaleDateString()
+                            .slice(0, 3)}
+                        </h6>
+                        <h6>
+                          <span>
+                            <img
+                              src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                              alt="weather icon"
+                            />
+                          </span>
+                          <br></br>
+                          {`${day.weather[0].main}`}
+                        </h6>
+                        <h6>{`High: ${day.temp.day.toFixed()}°F`}</h6>
+                        <h6>{`Low: ${day.temp.night.toFixed()}°F`}</h6>
+                        <h6 className="text-muted">
+                          {precipitation(day.weather[0].main) &&
+                            `${(day.pop * 100).toFixed()}%`}
+                        </h6>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );
