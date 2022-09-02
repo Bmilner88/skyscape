@@ -5,9 +5,9 @@ import { dayOfWeek, precipitation } from "../../utils/helpers";
 function Week({ week }) {
   return (
     <div className="container">
-      <div className="row align-items-center justify-content-center">
+      <div className="row align-items-center">
         {week && (
-          <div className="col-sm-auto col-lg-auto">
+          <div className="col-sm-auto col-lg-12">
             <Card>
               <Card.Header>
                 <Card.Title>
@@ -16,11 +16,12 @@ function Week({ week }) {
               </Card.Header>
               <Card.Body>
                 <div className="container-fluid py-2">
-                  <div className="d-flex flex-row flex-nowrap overflow-auto">
+                  <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between align-items-top">
                     {week.map((day) => (
                       <div className="m-4">
                         <h6>
-                          {dayOfWeek(new Date(day.dt * 1000).getDay())}{" "}
+                          {dayOfWeek(new Date(day.dt * 1000).getDay())}
+                          <br></br>
                           {new Date(day.dt * 1000)
                             .toLocaleDateString()
                             .slice(0, 3)}
