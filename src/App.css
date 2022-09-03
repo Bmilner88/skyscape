@@ -17,3 +17,7 @@
 .alertPopover {
   max-width: 44%;
 }
+
+.weather-card {
+  background-color: #e3e3e3;
+}

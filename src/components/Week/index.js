@@ -9,12 +9,12 @@ function Week({ week }) {
         {week && (
           <div className="col-sm-auto col-lg-12">
             <Card>
-              <Card.Header>
-                <Card.Title>
-                  <h4>7 Day Forecast</h4>
+              <Card.Header className="bg-dark">
+                <Card.Title className="m-0">
+                  <h4 className="text-white m-0">7 Day Forecast</h4>
                 </Card.Title>
               </Card.Header>
-              <Card.Body>
+              <Card.Body className="weather-card">
                 <div className="container-fluid py-2">
                   <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between align-items-top">
                     {week.map((day) => (

@@ -58,67 +58,71 @@ function Current({ current, hourly, alerts }) {
       <div className="row">
         <div className="col-sm col-lg-6">
           <Card className="mb-5">
-            <Card.Header>
-              <Card.Title>
-                <h4>Current Weather</h4>
+            <Card.Header className="bg-dark">
+              <Card.Title className="m-0">
+                <h4 className="text-white m-0">Current Weather</h4>
               </Card.Title>
             </Card.Header>
-            <h3 className="mt-4">
-              Current Temp:{" "}
-              <span className="border border-2 rounded p-1">{`${current.temp.toFixed()}°F`}</span>
-            </h3>
-            <h5 className="mt-2">
-              Feels Like:{" "}
-              <span className="border border-2 rounded p-1">{`${current.feels_like.toFixed()}°F`}</span>
-            </h5>
-            <h2>
-              {current.weather[0].main}
-              <br />
-              <span>
-                <img
-                  src={`http://openweathermap.org/img/wn/${current.weather[0].icon}.png`}
-                  alt="weather icon"
-                />
-              </span>
-            </h2>
-            <h6>{capitalizeFirstLetter(current.weather[0].description)}</h6>
-            <h6>Humidity: {current.humidity}%</h6>
-            <h6>Wind Speed: {current.wind_speed}mph</h6>
-            {alerts ? (
-              <div>
-                <h6>
+            <Card.Body className="weather-card">
+              <h3 className="mt-4">
+                Current Temp:{" "}
+                <span className="badge bg-dark">{`${current.temp.toFixed()}°F`}</span>
+              </h3>
+              <h4 className="mt-2">
+                Feels Like:{" "}
+                <span className="badge bg-secondary">{`${current.feels_like.toFixed()}°F`}</span>
+              </h4>
+              <h2>
+                {current.weather[0].main}
+                <br />
+                <span>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${current.weather[0].icon}.png`}
+                    alt="weather icon"
+                  />
+                </span>
+              </h2>
+              <h6>{capitalizeFirstLetter(current.weather[0].description)}</h6>
+              <h6>Humidity: {current.humidity}%</h6>
+              <h6>Wind Speed: {current.wind_speed}mph</h6>
+              {alerts ? (
+                <div>
+                  <h6>
+                    <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
+                      UV Index: {current.uvi}
+                    </span>
+                  </h6>
+                  <OverlayTrigger
+                    trigger="click"
+                    placement="top"
+                    overlay={alertPopover}
+                  >
+                    <button className="btn btn-danger my-4">
+                      Weather Alert
+                    </button>
+                  </OverlayTrigger>
+                </div>
+              ) : (
+                <h6 className="mt-1 mb-4">
                   <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
                     UV Index: {current.uvi}
                   </span>
                 </h6>
-                <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={alertPopover}
-                >
-                  <button className="btn btn-danger my-4">Weather Alert</button>
-                </OverlayTrigger>
-              </div>
-            ) : (
-              <h6 className="mt-1 mb-4">
-                <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
-                  UV Index: {current.uvi}
-                </span>
-              </h6>
-            )}
+              )}
+            </Card.Body>
           </Card>
         </div>
 
         {hourly && (
           <div className="col-lg-6 col-sm-auto d-flex mb-5 justify-content-center">
             <Card>
-              <Card.Header>
-                <Card.Title>
-                  <h4>12 Hour Forecast</h4>
+              <Card.Header className="bg-dark">
+                <Card.Title className="m-0">
+                  <h4 className="text-white m-0">12 Hour Forecast</h4>
                 </Card.Title>
               </Card.Header>
-              <Card.Body className="py-5">
-                <div className={`container-fluid ${alerts ? " py-5" : ""}`}>
+              <Card.Body className="py-5 weather-card">
+                <div className={`container-fluid my-4${alerts ? " py-5" : ""}`}>
                   <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between">
                     {hourly.map((hour) => (
                       <div className="m-4">
