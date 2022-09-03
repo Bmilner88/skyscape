@@ -88,7 +88,7 @@ function Current({ current, hourly, alerts }) {
               {alerts ? (
                 <div>
                   <h6>
-                    <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
+                    <span className={`p-1 badge bg-${uviColor(current.uvi)}`}>
                       UV Index: {current.uvi}
                     </span>
                   </h6>
@@ -121,7 +121,7 @@ function Current({ current, hourly, alerts }) {
                   <h4 className="text-white m-0">12 Hour Forecast</h4>
                 </Card.Title>
               </Card.Header>
-              <Card.Body className="py-5 weather-card">
+              <Card.Body className={`weather-card${!alerts ? " py-5" : ""}`}>
                 <div className={`container-fluid my-4${alerts ? " py-5" : ""}`}>
                   <div className="d-flex flex-row flex-nowrap overflow-auto justify-content-between">
                     {hourly.map((hour) => (
