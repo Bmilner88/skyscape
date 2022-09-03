@@ -104,7 +104,7 @@ function Current({ current, hourly, alerts }) {
                 </div>
               ) : (
                 <h6 className="mt-1 mb-4">
-                  <span className={`p-1 rounded bg-${uviColor(current.uvi)}`}>
+                  <span className={`p-1 badge bg-${uviColor(current.uvi)}`}>
                     UV Index: {current.uvi}
                   </span>
                 </h6>
