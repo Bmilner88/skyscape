@@ -22,9 +22,8 @@ function Week({ week }) {
                         <h6>
                           {dayOfWeek(new Date(day.dt * 1000).getDay())}
                           <br></br>
-                          {new Date(day.dt * 1000)
-                            .toLocaleDateString()
-                            .slice(0, 3)}
+                          {new Date(day.dt * 1000).getMonth() + 1}/
+                          {new Date(day.dt * 1000).getDate()}
                         </h6>
                         <h6>
                           <span>
