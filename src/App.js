@@ -58,7 +58,7 @@ function App() {
             `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
           ).then((res) => res.json()),
           fetch(
-            `http://api.openweathermap.org/data/2.5/air_pollution?lat=${json[0].lat}&lon=${json[0].lon}&appid=${W_API_KEY}`
+            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${json[0].lat}&lon=${json[0].lon}&appid=${W_API_KEY}`
           ).then((res) => res.json()),
         ]).then(
           (result) => {
