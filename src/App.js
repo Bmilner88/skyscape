@@ -24,6 +24,7 @@ function App() {
   const [week, setWeek] = useState();
   const [hourly, setHourly] = useState();
   const [alerts, setAlerts] = useState();
+  const [air, setAir] = useState();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -52,23 +53,28 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         setCityState({ city: `${json[0].name}`, state: `${json[0].state}` });
-        fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
-        )
-          .then((res) => res.json())
-          .then(
-            (result) => {
-              setIsLoaded(true);
-              setCurrent(result.current);
-              setWeek(result.daily.splice(1, 7));
-              setHourly(result.hourly.splice(2, 12));
-              setAlerts(result.alerts);
-            },
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          );
+        Promise.all([
+          fetch(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${json[0].lat}&lon=${json[0].lon}&exclude=minutely&units=imperial&appid=${W_API_KEY}`
+          ).then((res) => res.json()),
+          fetch(
+            `http://api.openweathermap.org/data/2.5/air_pollution?lat=${json[0].lat}&lon=${json[0].lon}&appid=${W_API_KEY}`
+          ).then((res) => res.json()),
+        ]).then(
+          (result) => {
+            console.log(result[1].list[0])
+            setIsLoaded(true);
+            setCurrent(result[0].current);
+            setWeek(result[0].daily.splice(1, 7));
+            setHourly(result[0].hourly.splice(2, 12));
+            setAlerts(result[0].alerts);
+            setAir(result[1].list[0])
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
       });
   };
 
@@ -192,7 +198,7 @@ function App() {
           <h1 className="m-5">{`${cityState.city}, ${cityState.state}`}</h1>
           <Fade>
             <div>
-              <Current current={current} hourly={hourly} alerts={alerts} />
+              <Current current={current} hourly={hourly} alerts={alerts} air={air}/>
             </div>
           </Fade>
           <Fade>

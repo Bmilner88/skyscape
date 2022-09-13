@@ -52,3 +52,18 @@ export function uviColor(uvi) {
     return "danger";
   }
 }
+
+export function aqiColor(aqi) {
+  switch (aqi) {
+    case 1:
+      return "success";
+    case 2:
+      return "success";
+    case 3:
+      return "warning";
+    case 4:
+      return "warning";
+    default:
+      return "danger";
+  }
+}
