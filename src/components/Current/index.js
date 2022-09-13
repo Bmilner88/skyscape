@@ -3,11 +3,12 @@ import { Card, OverlayTrigger, Popover, Carousel } from "react-bootstrap";
 import {
   hours,
   uviColor,
+  aqiColor,
   precipitation,
   capitalizeFirstLetter,
 } from "../../utils/helpers";
 
-function Current({ current, hourly, alerts }) {
+function Current({ current, hourly, alerts, air }) {
   const alertPopover = (
     <Popover id="alert-popover" className="alertPopover">
       {alerts && (
@@ -92,6 +93,11 @@ function Current({ current, hourly, alerts }) {
                       UV Index: {current.uvi}
                     </span>
                   </h6>
+                  <h6>
+                    <span className={`p-1 badge bg-${aqiColor(air.main.aqi)}`}>
+                      Air Quality Index: {air.main.aqi}
+                    </span>
+                  </h6>
                   <OverlayTrigger
                     trigger="click"
                     placement="top"
@@ -103,11 +109,18 @@ function Current({ current, hourly, alerts }) {
                   </OverlayTrigger>
                 </div>
               ) : (
-                <h6 className="mt-1 mb-4">
-                  <span className={`p-1 badge bg-${uviColor(current.uvi)}`}>
-                    UV Index: {current.uvi}
-                  </span>
-                </h6>
+                <>
+                  <h6 className="mt-1">
+                    <span className={`p-1 badge bg-${uviColor(current.uvi)}`}>
+                      UV Index: {current.uvi}
+                    </span>
+                  </h6>
+                  <h6 className="mb-4">
+                    <span className={`p-1 badge bg-${aqiColor(air.main.aqi)}`}>
+                      Air Quality Index: {air.main.aqi}
+                    </span>
+                  </h6>
+                </>
               )}
             </Card.Body>
           </Card>
